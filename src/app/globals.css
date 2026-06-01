@@ -1,53 +1,107 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Backgrounds */
+  --color-background: #252532;
+  --color-surface: #0B0E1A;
+  --color-elevated: #151827;
 
-  /* Design tokens — sourced from src/app/styles/design-tokens.ts */
-  --bg-body:         #050712;
-  --bg-surface:      #0B0E1A;
-  --bg-elevated:     #151827;
-  --text-primary:    #F9FAFB;
-  --text-secondary:  #9CA3AF;
-  --text-muted:      #6B7280;
-  --brand-primary:   #8C60F7;
-  --brand-secondary: #CEA7F9;
-  --border-subtle:   #1F2933;
-  --border-strong:   #374151;
-}
+  /* Text */
+  --color-text-primary: #F9FAFB;
+  --color-text-secondary: #9CA3AF;
+  --color-text-muted: #6B7280;
+  --color-text-inverse: #050712;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Brand */
+  --color-brand-primary: #8C60F7;
+  --color-brand-secondary: #CEA7F9;
+  --color-brand-accent: #F97316;
+
+  /* Borders */
+  --color-border-subtle: #1F2933;
+  --color-border-strong: #374151;
+
+  /* States */
+  --color-state-success: #10B981;
+  --color-state-warning: #FBBF24;
+  --color-state-danger: #EF4444;
+  --color-state-info: #3B82F6;
+
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-subtle: 0 10px 25px rgba(15, 23, 42, 0.65);
+  --shadow-elevated: 0 18px 45px rgba(15, 23, 42, 0.9);
+
+  /* Gradients */
+  --background-image-gradient-brand: linear-gradient(135deg, #D6AEF9 0%, #946CF5 45%, #792EFB 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Aliases so existing components using var(--bg-surface) etc. keep working */
+:root {
+  --bg-body: var(--color-background);
+  --bg-surface: var(--color-surface);
+  --bg-elevated: var(--color-elevated);
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-muted: var(--color-text-muted);
+  --brand-primary: var(--color-brand-primary);
+  --brand-secondary: var(--color-brand-secondary);
+  --border-subtle: var(--color-border-subtle);
+  --border-strong: var(--color-border-strong);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-background);
+  color: var(--color-text-primary);
   font-family: var(--font-geist-sans), sans-serif;
 }
 
 @keyframes timeline-fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.timeline-entry { animation: timeline-fade-in 0.4s ease-out both; }
-.timeline-entry:nth-child(1) { animation-delay: 0.05s; }
-.timeline-entry:nth-child(2) { animation-delay: 0.13s; }
-.timeline-entry:nth-child(3) { animation-delay: 0.21s; }
-.timeline-entry:nth-child(4) { animation-delay: 0.29s; }
-.timeline-entry:nth-child(5) { animation-delay: 0.37s; }
-.timeline-entry:nth-child(6) { animation-delay: 0.45s; }
-.timeline-entry:nth-child(7) { animation-delay: 0.53s; }
-.timeline-entry:nth-child(8) { animation-delay: 0.61s; }
+.timeline-entry {
+  animation: timeline-fade-in 0.4s ease-out both;
+}
+.timeline-entry:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.timeline-entry:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.timeline-entry:nth-child(3) {
+  animation-delay: 0.21s;
+}
+.timeline-entry:nth-child(4) {
+  animation-delay: 0.29s;
+}
+.timeline-entry:nth-child(5) {
+  animation-delay: 0.37s;
+}
+.timeline-entry:nth-child(6) {
+  animation-delay: 0.45s;
+}
+.timeline-entry:nth-child(7) {
+  animation-delay: 0.53s;
+}
+.timeline-entry:nth-child(8) {
+  animation-delay: 0.61s;
+}

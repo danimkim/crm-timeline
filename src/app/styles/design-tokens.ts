@@ -3,7 +3,7 @@
 
 export const colors = {
   background: {
-    body: '#050712',
+    body: '#252532',
     surface: '#0B0E1A',
     elevated: '#151827',
   },
