@@ -3,6 +3,18 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Design tokens — sourced from src/app/styles/design-tokens.ts */
+  --bg-body:         #050712;
+  --bg-surface:      #0B0E1A;
+  --bg-elevated:     #151827;
+  --text-primary:    #F9FAFB;
+  --text-secondary:  #9CA3AF;
+  --text-muted:      #6B7280;
+  --brand-primary:   #8C60F7;
+  --brand-secondary: #CEA7F9;
+  --border-subtle:   #1F2933;
+  --border-strong:   #374151;
 }
 
 @theme inline {
@@ -37,3 +49,5 @@ body {
 .timeline-entry:nth-child(4) { animation-delay: 0.29s; }
 .timeline-entry:nth-child(5) { animation-delay: 0.37s; }
 .timeline-entry:nth-child(6) { animation-delay: 0.45s; }
+.timeline-entry:nth-child(7) { animation-delay: 0.53s; }
+.timeline-entry:nth-child(8) { animation-delay: 0.61s; }
