@@ -5,7 +5,7 @@ import {
   radius,
   gradients,
   shadows,
-} from './src/styles/design-tokens.ts';
+} from './src/app/styles/design-tokens.ts';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -41,7 +41,7 @@ const config = {
         },
       },
       fontFamily: {
-        sans: [typography.fontFamily.sans],
+        sans: typography.fontFamily.sans,
       },
       borderRadius: {
         sm: radius.sm,

@@ -1,7 +1,7 @@
-import type { Client, TimelineEvent } from './types';
+import type { Client, TimelineEvent } from '@/components/crm/timeline/types';
 
 export const mockClient: Client = {
-  id: 'james-whitfield',
+  id: 'v001',
   name: 'James Whitfield',
   tier: 'VIP',
   preferredBrands: ['Rolex', 'Patek Philippe', 'Audemars Piguet'],

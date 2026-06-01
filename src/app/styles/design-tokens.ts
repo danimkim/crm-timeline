@@ -1,5 +1,3 @@
-// src/styles/design-tokens.ts
-
 // Global design tokens for the Retail Circle–style dark luxury theme.
 // These tokens are framework-agnostic and can be consumed by Tailwind, styled-components, CSS variables, etc.
 
@@ -69,7 +67,7 @@ export const shadows = {
 };
 
 export const gradients = {
-  brand: 'linear-gradient(135deg, #D6AEF9 0%, ##946CF5 45%, #792EFB 100%)',
+  brand: 'linear-gradient(135deg, #D6AEF9 0%, #946CF5 45%, #792EFB 100%)',
 };
 
 export const spacing = {
