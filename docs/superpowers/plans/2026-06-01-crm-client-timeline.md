@@ -12,9 +12,11 @@
 
 > **Next.js 16 breaking change:** `params` in page components is now a `Promise`. Always `await params` — do not access `.id` synchronously.
 
-> **Tailwind v4 note:** The project uses `@import "tailwindcss"` (not the old `@tailwind` directives). Standard color utilities (e.g. `bg-indigo-50`, `text-emerald-700`) work as usual. No `tailwind.config.js` is needed.
+> **Tailwind v4 note:** The project uses `@import "tailwindcss"` (not the old `@tailwind` directives). Standard colour utilities (e.g. `bg-indigo-500/10`, `text-indigo-400`) and arbitrary-value brackets (e.g. `bg-[var(--bg-surface)]`) both work. No `tailwind.config.js` is needed.
 
 > **Path alias:** `@/*` maps to `src/*` (configured in `tsconfig.json`).
+
+> **Design tokens:** All surface, text, and border colours come from `src/app/styles/design-tokens.ts` (dark luxury theme). Task 5 registers them as CSS custom properties in the existing `:root` block in `src/app/globals.css`. Every component then references them via Tailwind arbitrary-value brackets — e.g. `bg-[var(--bg-surface)]`, `text-[var(--text-primary)]`. Event-type accent colours (indigo, emerald, etc.) are not in the token file; use standard Tailwind opacity variants for those — e.g. `bg-indigo-500/10 text-indigo-400`.
 
 ---
 
@@ -25,10 +27,10 @@
 | `src/components/crm/timeline/types.ts` | Create | All shared TypeScript types |
 | `src/components/crm/timeline/mockData.ts` | Create | One customer + eight events covering all event types |
 | `src/components/crm/timeline/TimelineHeader.tsx` | Create | Customer summary card (name, tier badge, stats) |
-| `src/components/crm/timeline/TimelineEventCard.tsx` | Create | Single event card with icon, accent color, value display |
+| `src/components/crm/timeline/TimelineEventCard.tsx` | Create | Single event card with icon, accent colour, value display |
 | `src/components/crm/timeline/TimelineList.tsx` | Create | Sorted chronological feed with left-side connector line |
 | `src/app/clients/[id]/timeline/page.tsx` | Create | Route page wiring header + list together |
-| `src/app/globals.css` | Modify | Add stagger animation delays for events 7 and 8 |
+| `src/app/globals.css` | Modify | Add design-token CSS custom properties + stagger animation delays for events 7 and 8 |
 
 ---
 
@@ -220,7 +222,7 @@ git commit -m "feat: add CRM timeline mock data (James Whitfield, 8 events)"
 - Create: `src/components/crm/timeline/TimelineHeader.tsx`
 - Depends on: `types.ts`
 
-Displays: customer name, tier badge, preferred brands, lifetime value, trade-in count, last interaction date.
+Displays: customer name, tier badge, preferred brands, lifetime value, trade-in count, last interaction date. All surface/text/border colours use CSS custom properties defined in `globals.css` (Task 5). Tier badge uses brand token colours for VIP and state.info for High Value.
 
 - [ ] **Step 1: Create the component**
 
@@ -232,9 +234,9 @@ interface Props {
 }
 
 const TIER_STYLES: Record<Client['tier'], string> = {
-  'VIP':        'bg-amber-100 text-amber-800',
-  'High Value': 'bg-blue-100 text-blue-800',
-  'Standard':   'bg-gray-100 text-gray-700',
+  'VIP':        'bg-[#8C60F7]/15 text-[#CEA7F9]',
+  'High Value': 'bg-[#3B82F6]/15 text-[#93C5FD]',
+  'Standard':   'bg-[var(--bg-elevated)] text-[var(--text-secondary)]',
 };
 
 function formatCurrency(value: number): string {
@@ -255,10 +257,10 @@ function formatDate(isoString: string): string {
 
 export default function TimelineHeader({ client }: Props) {
   return (
-    <div className="bg-white border border-gray-100 shadow-sm rounded-xl p-6 mb-8">
+    <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm rounded-xl p-6 mb-8">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
+          <h1 className="text-2xl font-semibold text-[var(--text-primary)] tracking-tight">
             {client.name}
           </h1>
           <span
@@ -267,37 +269,37 @@ export default function TimelineHeader({ client }: Props) {
             {client.tier}
           </span>
         </div>
-        <p className="text-sm text-gray-400 text-right whitespace-nowrap">
+        <p className="text-sm text-[var(--text-muted)] text-right whitespace-nowrap">
           Last interaction
           <br />
-          <span className="text-gray-600 font-medium">
+          <span className="text-[var(--text-secondary)] font-medium">
             {formatDate(client.lastInteractionDate)}
           </span>
         </p>
       </div>
 
-      <div className="mt-5 pt-5 border-t border-gray-100 grid grid-cols-3 gap-6">
+      <div className="mt-5 pt-5 border-t border-[var(--border-subtle)] grid grid-cols-3 gap-6">
         <div>
-          <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">
+          <p className="text-xs text-[var(--text-muted)] uppercase tracking-wide mb-1">
             Preferred Brands
           </p>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-[var(--text-secondary)]">
             {client.preferredBrands.join(', ')}
           </p>
         </div>
         <div>
-          <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">
+          <p className="text-xs text-[var(--text-muted)] uppercase tracking-wide mb-1">
             Lifetime Value
           </p>
-          <p className="text-xl font-bold text-gray-900">
+          <p className="text-xl font-bold text-[var(--text-primary)]">
             {formatCurrency(client.lifetimeValue)}
           </p>
         </div>
         <div>
-          <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">
+          <p className="text-xs text-[var(--text-muted)] uppercase tracking-wide mb-1">
             Trade-ins
           </p>
-          <p className="text-xl font-bold text-gray-900">{client.tradeInCount}</p>
+          <p className="text-xl font-bold text-[var(--text-primary)]">{client.tradeInCount}</p>
         </div>
       </div>
     </div>
@@ -327,7 +329,7 @@ git commit -m "feat: add TimelineHeader component"
 - Create: `src/components/crm/timeline/TimelineEventCard.tsx`
 - Depends on: `types.ts`
 
-Renders a single event with type-specific icon + accent color, date/time, title, body, channel badge, monetary value (for purchase/trade_in/quotation), and handled-by line.
+Renders a single event with type-specific icon + accent colour, date/time, title, body, channel badge, monetary value (for purchase/trade_in/quotation), and handled-by line. Event-type accent colours use standard Tailwind opacity variants (`bg-*-500/10`, `text-*-400`) since these colours are not in the design token file. All neutral surface/text/border values use CSS custom properties.
 
 - [ ] **Step 1: Create the component**
 
@@ -339,14 +341,14 @@ interface Props {
 }
 
 const EVENT_CONFIG: Record<EventType, { label: string; bg: string; text: string }> = {
-  appointment: { label: 'Appointment', bg: 'bg-indigo-50',  text: 'text-indigo-700' },
-  message:     { label: 'Message',     bg: 'bg-emerald-50', text: 'text-emerald-700' },
-  email:       { label: 'Email',       bg: 'bg-sky-50',     text: 'text-sky-700' },
-  call:        { label: 'Call',        bg: 'bg-violet-50',  text: 'text-violet-700' },
-  purchase:    { label: 'Purchase',    bg: 'bg-amber-50',   text: 'text-amber-700' },
-  trade_in:    { label: 'Trade-in',    bg: 'bg-orange-50',  text: 'text-orange-700' },
-  quotation:   { label: 'Quotation',   bg: 'bg-blue-50',    text: 'text-blue-700' },
-  sourcing:    { label: 'Sourcing',    bg: 'bg-teal-50',    text: 'text-teal-700' },
+  appointment: { label: 'Appointment', bg: 'bg-indigo-500/10',  text: 'text-indigo-400' },
+  message:     { label: 'Message',     bg: 'bg-emerald-500/10', text: 'text-emerald-400' },
+  email:       { label: 'Email',       bg: 'bg-sky-500/10',     text: 'text-sky-400' },
+  call:        { label: 'Call',        bg: 'bg-violet-500/10',  text: 'text-violet-400' },
+  purchase:    { label: 'Purchase',    bg: 'bg-amber-500/10',   text: 'text-amber-400' },
+  trade_in:    { label: 'Trade-in',    bg: 'bg-orange-500/10',  text: 'text-orange-400' },
+  quotation:   { label: 'Quotation',   bg: 'bg-blue-500/10',    text: 'text-blue-400' },
+  sourcing:    { label: 'Sourcing',    bg: 'bg-teal-500/10',    text: 'text-teal-400' },
 };
 
 const CHANNEL_LABEL: Record<Channel, string> = {
@@ -435,7 +437,7 @@ export default function TimelineEventCard({ event }: Props) {
     event.value != null;
 
   return (
-    <div className="bg-white border border-gray-100 shadow-sm rounded-xl p-5">
+    <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm rounded-xl p-5">
       <div className="flex items-start gap-4">
         <div
           className={`flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg ${config.bg} ${config.text}`}
@@ -449,28 +451,28 @@ export default function TimelineEventCard({ event }: Props) {
               {config.label}
             </span>
             {event.channel && (
-              <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
+              <span className="text-xs bg-[var(--bg-elevated)] text-[var(--text-muted)] px-2 py-0.5 rounded-full">
                 {CHANNEL_LABEL[event.channel]}
               </span>
             )}
           </div>
 
-          <p className="text-xs text-gray-400 mt-0.5">{formatEventDate(event.date)}</p>
+          <p className="text-xs text-[var(--text-muted)] mt-0.5">{formatEventDate(event.date)}</p>
 
-          <h3 className="mt-2 text-sm font-semibold text-gray-900 leading-snug">
+          <h3 className="mt-2 text-sm font-semibold text-[var(--text-primary)] leading-snug">
             {event.title}
           </h3>
-          <p className="mt-1 text-sm text-gray-500 leading-relaxed">{event.body}</p>
+          <p className="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">{event.body}</p>
 
           {showValue && (
-            <p className="mt-3 text-base font-bold text-gray-900">
+            <p className="mt-3 text-base font-bold text-[var(--text-primary)]">
               {formatCurrency(event.value!)}
             </p>
           )}
 
-          <p className="mt-3 text-xs text-gray-400">
+          <p className="mt-3 text-xs text-[var(--text-muted)]">
             Handled by{' '}
-            <span className="text-gray-600">{event.handledBy}</span>
+            <span className="text-[var(--text-secondary)]">{event.handledBy}</span>
           </p>
         </div>
       </div>
@@ -495,27 +497,59 @@ git commit -m "feat: add TimelineEventCard with 8 type variants and icon/color m
 
 ---
 
-### Task 5: TimelineList Component + Animation Fix
+### Task 5: TimelineList Component + CSS Tokens + Animation Fix
 
 **Files:**
 - Create: `src/components/crm/timeline/TimelineList.tsx`
 - Modify: `src/app/globals.css`
 - Depends on: `types.ts`, `TimelineEventCard.tsx`
 
-The existing `globals.css` only defines stagger delays for `:nth-child(1)` through `:nth-child(6)`. We have 8 events, so add delays for 7 and 8.
+Two changes to `globals.css`: (1) add design-token CSS custom properties to the existing `:root` block, sourced from `src/app/styles/design-tokens.ts`; (2) append stagger delays for events 7 and 8, which the current animation block is missing.
 
-- [ ] **Step 1: Add animation delays for items 7 and 8 in `src/app/globals.css`**
+- [ ] **Step 1: Update `src/app/globals.css`**
 
-Append these two lines at the end of the animation block (after the existing `:nth-child(6)` line):
-
-```css
-.timeline-entry:nth-child(7) { animation-delay: 0.53s; }
-.timeline-entry:nth-child(8) { animation-delay: 0.61s; }
-```
-
-The full animation section in `globals.css` should now read:
+Extend the existing `:root` block to include the design-token custom properties, and append two animation-delay lines. The file should read:
 
 ```css
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Design tokens — sourced from src/app/styles/design-tokens.ts */
+  --bg-body:         #050712;
+  --bg-surface:      #0B0E1A;
+  --bg-elevated:     #151827;
+  --text-primary:    #F9FAFB;
+  --text-secondary:  #9CA3AF;
+  --text-muted:      #6B7280;
+  --brand-primary:   #8C60F7;
+  --brand-secondary: #CEA7F9;
+  --border-subtle:   #1F2933;
+  --border-strong:   #374151;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
 @keyframes timeline-fade-in {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -553,7 +587,7 @@ export default function TimelineList({ events }: Props) {
     <div className="relative">
       {/* Connector line running behind the dots */}
       <div
-        className="absolute left-[5px] top-0 bottom-0 w-px bg-gray-200"
+        className="absolute left-[5px] top-0 bottom-0 w-px bg-[var(--border-subtle)]"
         aria-hidden="true"
       />
       <ul className="space-y-4">
@@ -561,7 +595,7 @@ export default function TimelineList({ events }: Props) {
           <li key={event.id} className="relative timeline-entry pl-8">
             {/* Dot sitting on the connector line */}
             <div
-              className="absolute left-0 top-[18px] w-3 h-3 rounded-full bg-white border-2 border-gray-300"
+              className="absolute left-0 top-[18px] w-3 h-3 rounded-full bg-[var(--bg-surface)] border-2 border-[var(--border-strong)]"
               aria-hidden="true"
             />
             <TimelineEventCard event={event} />
@@ -584,7 +618,7 @@ Expected: no errors.
 
 ```bash
 git add src/components/crm/timeline/TimelineList.tsx src/app/globals.css
-git commit -m "feat: add TimelineList with connector line and stagger animation"
+git commit -m "feat: add TimelineList, stagger animation delays, and design-token CSS vars"
 ```
 
 ---
@@ -595,7 +629,7 @@ git commit -m "feat: add TimelineList with connector line and stagger animation"
 - Create: `src/app/clients/[id]/timeline/page.tsx`
 - Depends on: all four components and `mockData.ts`
 
-The page ignores the `id` param (prototype always renders mock data). It still `await`s `params` because in Next.js 16 `params` is a `Promise` — skipping the await causes a TypeScript error.
+The page ignores the `id` param (prototype always renders mock data). It still `await`s `params` because in Next.js 16 `params` is a `Promise` — skipping the await causes a TypeScript error. Page background uses the `--bg-body` token (deepest dark, `#050712`).
 
 - [ ] **Step 1: Create the directory**
 
@@ -618,7 +652,7 @@ export default async function TimelinePage({
   await params; // required in Next.js 16 — params is a Promise
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12">
+    <main className="min-h-screen bg-[var(--bg-body)] py-12">
       <div className="max-w-3xl mx-auto px-6">
         <TimelineHeader client={mockClient} />
         <TimelineList events={mockEvents} />
@@ -663,26 +697,27 @@ Navigate to: `http://localhost:3000/clients/james-whitfield/timeline`
 
 | Check | Expected |
 |---|---|
-| Page background | Light gray (`gray-50`) |
-| Customer name | "James Whitfield" — 2xl semibold |
-| Tier badge | "VIP" — amber pill |
-| Preferred brands | "Rolex, Patek Philippe, Audemars Piguet" |
-| Lifetime value | "£384,500" — bold, xl |
-| Trade-ins | "2" |
-| Last interaction | "May 28, 2026" |
+| Page background | Deep near-black (`#050712`) |
+| Customer name | "James Whitfield" — 2xl semibold, near-white text |
+| Tier badge | "VIP" — subtle purple pill (`#8C60F7` tint bg, `#CEA7F9` text) |
+| Preferred brands | "Rolex, Patek Philippe, Audemars Piguet" — secondary text |
+| Lifetime value | "£384,500" — bold, xl, near-white |
+| Trade-ins | "2" — bold, xl, near-white |
+| Last interaction | "May 28, 2026" — secondary text |
+| Header card | Dark surface (`#0B0E1A`) with subtle border (`#1F2933`) |
 | Event count | 8 cards in the list |
 | Order | Appointment (May 28) at top, Email (Feb 10) at bottom |
-| Connector line | Faint gray vertical line on the left |
-| Dots | Small circles sitting on the line, one per card |
+| Connector line | Faint vertical line on the left using `--border-subtle` (`#1F2933`) |
+| Dots | Small circles on the line — dark surface fill, `--border-strong` ring |
 | Animation | Cards stagger-fade in on load |
-| Appointment | Indigo icon, "In-person" badge |
-| Sourcing | Teal magnifying-glass icon, "Platform" badge |
-| Quotation | Blue document icon, "£68,000" bold value |
-| Message | Emerald chat icon, "via WhatsApp" badge |
-| Purchase | Amber bag icon, "£42,500" bold value |
-| Trade-in | Orange arrows icon, "£6,200" bold value |
-| Call | Violet phone icon, "via Phone" badge |
-| Email (oldest) | Sky envelope icon, "via Email" badge |
+| Appointment | Indigo-tinted icon square, "In-person" badge in elevated bg |
+| Sourcing | Teal-tinted magnifying-glass icon, "Platform" badge |
+| Quotation | Blue-tinted document icon, "£68,000" near-white bold value |
+| Message | Emerald-tinted chat icon, "via WhatsApp" badge |
+| Purchase | Amber-tinted bag icon, "£42,500" near-white bold value |
+| Trade-in | Orange-tinted arrows icon, "£6,200" near-white bold value |
+| Call | Violet-tinted phone icon, "via Phone" badge |
+| Email (oldest) | Sky-tinted envelope icon, "via Email" badge |
 | No console errors | Browser devtools console is clean |
 
 - [ ] **Step 4: Commit any visual fixes, then final commit**
