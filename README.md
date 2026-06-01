@@ -1,1 +1,1 @@
-Retail Circle OS
+# CRM All-in-one Client Timeline Component
