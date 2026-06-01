@@ -51,6 +51,8 @@ Above the feed, a summary header surfaces key client signals at a glance: tier (
 
 Navigate to `/clients/[id]/timeline` to view the timeline. The prototype renders a fixed mock client — **James Whitfield**, VIP tier, ￡384,500 lifetime value — across all 8 event types.
 
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/3c73917e-c925-4009-b18e-ec68e3d44ca6" />
+
 ---
 
 ## Project Structure
