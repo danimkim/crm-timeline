@@ -85,10 +85,10 @@ export default function TimelineEventCard({ event }: Props) {
     event.value != null;
 
   return (
-    <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm rounded-xl p-5">
+    <div className="bg-(--bg-surface) border border-(--border-subtle) shadow-sm rounded-xl p-5">
       <div className="flex items-start gap-4">
         <div
-          className={`flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg ${config.bg} ${config.text}`}
+          className={`shrink-0 flex items-center justify-center w-9 h-9 rounded-lg ${config.bg} ${config.text}`}
         >
           <EventIcon type={event.type} />
         </div>
@@ -99,28 +99,28 @@ export default function TimelineEventCard({ event }: Props) {
               {config.label}
             </span>
             {event.channel && (
-              <span className="text-xs bg-[var(--bg-elevated)] text-[var(--text-muted)] px-2 py-0.5 rounded-full">
+              <span className="text-xs bg-(--bg-elevated) text-(--text-muted) px-2 py-0.5 rounded-full">
                 {CHANNEL_LABEL[event.channel]}
               </span>
             )}
           </div>
 
-          <p className="text-xs text-[var(--text-muted)] mt-0.5">{formatEventDate(event.date)}</p>
+          <p className="text-xs text-(--text-muted) mt-0.5">{formatEventDate(event.date)}</p>
 
-          <h3 className="mt-2 text-sm font-semibold text-[var(--text-primary)] leading-snug">
+          <h3 className="mt-2 text-sm font-semibold text-(--text-primary) leading-snug">
             {event.title}
           </h3>
-          <p className="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">{event.body}</p>
+          <p className="mt-1 text-sm text-(--text-secondary) leading-relaxed">{event.body}</p>
 
           {showValue && (
-            <p className="mt-3 text-base font-bold text-[var(--text-primary)]">
+            <p className="mt-3 text-base font-bold text-(--text-primary)">
               {formatCurrency(event.value!)}
             </p>
           )}
 
-          <p className="mt-3 text-xs text-[var(--text-muted)]">
+          <p className="mt-3 text-xs text-(--text-muted)">
             Handled by{' '}
-            <span className="text-[var(--text-secondary)]">{event.handledBy}</span>
+            <span className="text-(--text-secondary)">{event.handledBy}</span>
           </p>
         </div>
       </div>
