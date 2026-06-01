@@ -35,7 +35,7 @@ function formatEventDate(isoString: string): string {
 }
 
 function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-GB', {
     style: 'currency', currency: 'GBP', maximumFractionDigits: 0,
   }).format(value);
 }

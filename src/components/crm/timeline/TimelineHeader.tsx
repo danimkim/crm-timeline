@@ -11,7 +11,7 @@ const TIER_STYLES: Record<Client['tier'], string> = {
 };
 
 function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-GB', {
     style: 'currency',
     currency: 'GBP',
     maximumFractionDigits: 0,
