@@ -1,4 +1,5 @@
 import type { EventType, Channel, TimelineEvent } from './types';
+import { formatCurrency, formatEventDate } from '@/utils/format';
 
 interface Props {
   event: TimelineEvent;
@@ -22,23 +23,6 @@ const CHANNEL_LABEL: Record<Channel, string> = {
   in_person: 'In-person',
   platform:  'Platform',
 };
-
-function formatEventDate(isoString: string): string {
-  const date = new Date(isoString);
-  const datePart = new Intl.DateTimeFormat('en-US', {
-    month: 'long', day: 'numeric', year: 'numeric',
-  }).format(date);
-  const timePart = new Intl.DateTimeFormat('en-US', {
-    hour: 'numeric', minute: '2-digit', hour12: true,
-  }).format(date);
-  return `${datePart} · ${timePart}`;
-}
-
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-GB', {
-    style: 'currency', currency: 'GBP', maximumFractionDigits: 0,
-  }).format(value);
-}
 
 function EventIcon({ type }: { type: EventType }) {
   const cls = 'w-5 h-5';

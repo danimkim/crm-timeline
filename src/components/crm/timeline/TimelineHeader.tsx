@@ -1,4 +1,5 @@
 import type { Client } from './types';
+import { formatCurrency, formatDate } from '@/utils/format';
 
 interface Props {
   client: Client;
@@ -9,22 +10,6 @@ const TIER_STYLES: Record<Client['tier'], string> = {
   'High Value': 'bg-[#3B82F6]/15 text-[#93C5FD]',
   'Standard':   'bg-[var(--bg-elevated)] text-[var(--text-secondary)]',
 };
-
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP',
-    maximumFractionDigits: 0,
-  }).format(value);
-}
-
-function formatDate(isoString: string): string {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(new Date(isoString));
-}
 
 export default function TimelineHeader({ client }: Props) {
   return (

@@ -1,4 +1,4 @@
-import { mockClient, mockEvents } from '@/components/crm/timeline/mockData';
+import {mockClient, mockEvents } from '@/data/timeline'
 import TimelineHeader from '@/components/crm/timeline/TimelineHeader';
 import TimelineList from '@/components/crm/timeline/TimelineList';
 
