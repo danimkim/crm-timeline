@@ -3,29 +3,29 @@
 @theme {
   /* Backgrounds */
   --color-background: #252532;
-  --color-surface: #0B0E1A;
+  --color-surface: #303040;
   --color-elevated: #151827;
 
   /* Text */
-  --color-text-primary: #F9FAFB;
-  --color-text-secondary: #9CA3AF;
-  --color-text-muted: #6B7280;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
   --color-text-inverse: #050712;
 
   /* Brand */
-  --color-brand-primary: #8C60F7;
-  --color-brand-secondary: #CEA7F9;
-  --color-brand-accent: #F97316;
+  --color-brand-primary: #8c60f7;
+  --color-brand-secondary: #cea7f9;
+  --color-brand-accent: #f97316;
 
   /* Borders */
-  --color-border-subtle: #1F2933;
+  --color-border-subtle: #3a3a48;
   --color-border-strong: #374151;
 
   /* States */
-  --color-state-success: #10B981;
-  --color-state-warning: #FBBF24;
-  --color-state-danger: #EF4444;
-  --color-state-info: #3B82F6;
+  --color-state-success: #10b981;
+  --color-state-warning: #fbbf24;
+  --color-state-danger: #ef4444;
+  --color-state-info: #3b82f6;
 
   /* Typography */
   --font-sans: var(--font-geist-sans);
@@ -44,7 +44,12 @@
   --shadow-elevated: 0 18px 45px rgba(15, 23, 42, 0.9);
 
   /* Gradients */
-  --background-image-gradient-brand: linear-gradient(135deg, #D6AEF9 0%, #946CF5 45%, #792EFB 100%);
+  --background-image-gradient-brand: linear-gradient(
+    135deg,
+    #d6aef9 0%,
+    #946cf5 45%,
+    #792efb 100%
+  );
 }
 
 /* Aliases so existing components using var(--bg-surface) etc. keep working */
