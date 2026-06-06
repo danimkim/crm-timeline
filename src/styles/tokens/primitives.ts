@@ -46,6 +46,7 @@ export const primitives = {
     },
     amber: {
       400: '#fbbf24',
+      500: '#f59e0b',
       600: '#d97706',
     },
     red: {
@@ -110,8 +111,10 @@ export const primitives = {
   },
 
   shadow: {
-    sm: '0 10px 25px rgba(15, 23, 42, 0.65)',
-    md: '0 18px 45px rgba(15, 23, 42, 0.9)',
+    sm:      '0 10px 25px rgba(15, 23, 42, 0.65)',
+    md:      '0 18px 45px rgba(15, 23, 42, 0.9)',
+    smLight: '0 4px 12px rgba(0, 0, 0, 0.08)',
+    mdLight: '0 8px 30px rgba(0, 0, 0, 0.12)',
   },
 
   zIndex: {

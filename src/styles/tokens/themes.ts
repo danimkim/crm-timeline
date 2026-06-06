@@ -43,7 +43,7 @@ const dark: Theme = {
   background: {
     page:     color.ink[800],
     surface:  color.ink[700],
-    elevated: color.ink[850],
+    elevated: color.ink[850], // intentionally darker — used for deep panels/modal backdrops in this dark-luxury theme
     overlay:  'rgba(0, 0, 0, 0.7)',
   },
   text: {
@@ -108,8 +108,8 @@ const light: Theme = {
     info:    { bg: 'rgba(59, 130, 246, 0.1)',   text: color.blue[600],    border: 'rgba(59, 130, 246, 0.3)' },
   },
   shadow: {
-    subtle:   '0 4px 12px rgba(0, 0, 0, 0.08)',
-    elevated: '0 8px 30px rgba(0, 0, 0, 0.12)',
+    subtle:   primitives.shadow.smLight,
+    elevated: primitives.shadow.mdLight,
   },
 };
 
