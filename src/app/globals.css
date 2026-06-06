@@ -85,6 +85,7 @@
   --token-shadow-subtle: 0 10px 25px rgba(15, 23, 42, 0.65);
   --token-shadow-elevated: 0 18px 45px rgba(15, 23, 42, 0.9);
 }
+
 [data-theme="light"] {
   --token-background-page: #ffffff;
   --token-background-surface: #f9fafb;
@@ -121,21 +122,21 @@
 
 /* Aliases so existing components using var(--bg-surface) etc. keep working */
 :root {
-  --bg-body: var(--color-background);
-  --bg-surface: var(--color-surface);
-  --bg-elevated: var(--color-elevated);
-  --text-primary: var(--color-text-primary);
-  --text-secondary: var(--color-text-secondary);
-  --text-muted: var(--color-text-muted);
-  --brand-primary: var(--color-brand-primary);
-  --brand-secondary: var(--color-brand-secondary);
-  --border-subtle: var(--color-border-subtle);
-  --border-strong: var(--color-border-strong);
+  --bg-body:         var(--token-background-page);
+  --bg-surface:      var(--token-background-surface);
+  --bg-elevated:     var(--token-background-elevated);
+  --text-primary:    var(--token-text-primary);
+  --text-secondary:  var(--token-text-secondary);
+  --text-muted:      var(--token-text-muted);
+  --brand-primary:   var(--token-brand-primary);
+  --brand-secondary: var(--token-brand-secondary);
+  --border-subtle:   var(--token-border-subtle);
+  --border-strong:   var(--token-border-strong);
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-text-primary);
+  background: var(--token-background-page);
+  color: var(--token-text-primary);
   font-family: var(--font-geist-sans), sans-serif;
 }
 

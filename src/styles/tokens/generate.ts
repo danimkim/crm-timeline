@@ -38,6 +38,7 @@ export function generateCss(input: { dark: Theme; light: Theme }): string {
     ':root {',
     mapToCss(darkVars),
     '}',
+    '',
     '[data-theme="light"] {',
     mapToCss(lightVars),
     '}',
