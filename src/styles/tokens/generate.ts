@@ -5,7 +5,11 @@ type CssVarMap = Record<string, string>;
 function flattenObject(obj: Record<string, unknown>, prefix: string): CssVarMap {
   const result: CssVarMap = {};
   for (const [key, value] of Object.entries(obj)) {
-    const name = `${prefix}-${key}`;
+    const kebab = key.replace(/([A-Z])/g, (m) => `-${m.toLowerCase()}`);
+    const name  = `${prefix}-${kebab}`;
+    if (Array.isArray(value)) {
+      throw new Error(`flattenObject: array value at "${name}" is not supported`);
+    }
     if (typeof value === 'object' && value !== null) {
       Object.assign(result, flattenObject(value as Record<string, unknown>, name));
     } else {
