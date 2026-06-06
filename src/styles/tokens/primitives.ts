@@ -6,7 +6,7 @@ export const primitives = {
     // Purple-tinted dark backgrounds unique to this app
     ink: {
       950: '#050712',
-      900: '#0B0E1A',
+      900: '#0b0e1a',
       850: '#151827',
       800: '#252532',
       700: '#303040',
@@ -88,6 +88,7 @@ export const primitives = {
   },
 
   fontFamily: {
+    // fallback stacks for non-CSS contexts (canvas, charts); layout.tsx loads Geist via Next.js font
     sans: '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     mono: '"Geist Mono", ui-monospace, monospace',
   },
