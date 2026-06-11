@@ -43,7 +43,7 @@ export const CHANNEL_LABEL: Record<Channel, string> = {
 };
 
 export const TIER_STYLES: Record<Client['tier'], string> = {
-  VIP: 'bg-[--color-brand-primary]/15 text-[--color-brand-secondary]',
-  'High Value': 'bg-[--color-state-info]/15 text-[--color-state-info-text]',
-  Standard: 'bg-[var(--bg-elevated)] text-[var(--text-secondary)]',
+  VIP: 'bg-(--brand-primary)/15 text-(--brand-secondary)',
+  'High Value': 'bg-(--token-state-info-bg) text-(--token-state-info-text)',
+  Standard: 'bg-(--bg-elevated) text-(--text-secondary)',
 };
