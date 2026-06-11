@@ -6,6 +6,8 @@ interface Props {
   client: Client;
 }
 
+const STAT_LABEL = 'text-xs text-(--text-muted) uppercase tracking-wide mb-1';
+
 export default function TimelineHeader({ client }: Props) {
   return (
     <div className="bg-(--bg-surface) border border-(--border-subtle) shadow-sm rounded-xl p-6 mb-8">
@@ -31,7 +33,7 @@ export default function TimelineHeader({ client }: Props) {
 
       <div className="mt-5 pt-5 border-t border-(--border-subtle) grid grid-cols-3 gap-6">
         <div>
-          <p className="text-xs text-(--text-muted) uppercase tracking-wide mb-1">
+          <p className={STAT_LABEL}>
             Preferred Brands
           </p>
           <p className="text-sm text-(--text-secondary)">
@@ -39,7 +41,7 @@ export default function TimelineHeader({ client }: Props) {
           </p>
         </div>
         <div>
-          <p className="text-xs text-(--text-muted) uppercase tracking-wide mb-1">
+          <p className={STAT_LABEL}>
             Lifetime Value
           </p>
           <p className="text-xl font-bold text-(--text-primary)">
@@ -47,7 +49,7 @@ export default function TimelineHeader({ client }: Props) {
           </p>
         </div>
         <div>
-          <p className="text-xs text-(--text-muted) uppercase tracking-wide mb-1">
+          <p className={STAT_LABEL}>
             Trade-ins
           </p>
           <p className="text-xl font-bold text-(--text-primary)">
